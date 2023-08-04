@@ -67,9 +67,6 @@ function flashBackground() {
 
 playAlarmButton.addEventListener('click', playAlarm);
 
-function playAlarm() {
-    alarmAudio.play();
-}
 
 function playAlarm() {
     const audio = new Audio('alarm.mp3');
