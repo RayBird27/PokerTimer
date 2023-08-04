@@ -1,2 +1,2 @@
 # PokerTimer
-Website for Poker Timer
+Website for Poker Champions Timer
