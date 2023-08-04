@@ -8,6 +8,7 @@ const startButton = document.getElementById('start');
 const resetButton = document.getElementById('reset');
 const inputTime = document.getElementById('inputTime');
 const alarmAudio = document.getElementById('alarmAudio');
+const playAlarmButton = document.getElementById('playAlarm');
 
 function startTimer() {
     if (!timerInterval) {
@@ -63,6 +64,8 @@ function flashBackground() {
         setTimeout(flashBackground, 500);
     }
 }
+
+playAlarmButton.addEventListener('click', playAlarm);
 
 function playAlarm() {
     alarmAudio.play();
