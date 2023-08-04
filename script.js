@@ -7,6 +7,7 @@ const timerElement = document.getElementById('timer');
 const startButton = document.getElementById('start');
 const resetButton = document.getElementById('reset');
 const inputTime = document.getElementById('inputTime');
+const alarmAudio = document.getElementById('alarmAudio');
 
 function startTimer() {
     if (!timerInterval) {
@@ -27,6 +28,8 @@ function resetTimer() {
     inputTime.disabled = false;
     isFlashing = false;
     document.body.style.backgroundColor = '#f0f0f0';
+    alarmAudio.pause(); // Pause the audio on reset
+    alarmAudio.currentTime = 0; // Reset the audio to the beginning
 }
 
 function updateTimer() {
@@ -62,9 +65,14 @@ function flashBackground() {
 }
 
 function playAlarm() {
+    alarmAudio.play();
+}
+
+function playAlarm() {
     const audio = new Audio('alarm.mp3');
     audio.play();
 }
 
 startButton.addEventListener('click', startTimer);
 resetButton.addEventListener('click', resetTimer);
+
