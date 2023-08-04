@@ -17,6 +17,7 @@ function startTimer() {
         timerInterval = setInterval(updateTimer, 1000);
         startButton.disabled = true;
         inputTime.disabled = true;
+        document.body.style.backgroundColor = '#121212';
     }
 }
 
@@ -28,9 +29,10 @@ function resetTimer() {
     startButton.disabled = false;
     inputTime.disabled = false;
     isFlashing = false;
-    document.body.style.backgroundColor = '#f0f0f0';
-    alarmAudio.pause(); // Pause the audio on reset
-    alarmAudio.currentTime = 0; // Reset the audio to the beginning
+    // Remove the background color change and keep it dark
+    document.body.style.backgroundColor = '#121212';
+    alarmAudio.pause();
+    alarmAudio.currentTime = 0;
 }
 
 function updateTimer() {
