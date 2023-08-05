@@ -47,7 +47,7 @@ startButton.addEventListener('click', () => {
         timerDisplay.textContent = formatTime(seconds);
         timer = setInterval(updateTimer, 1000);
         isRunning = true;
-        playAlarm(); // Play alarm on starting the timer
+        //playAlarm(); // Play alarm on starting the timer
     }
 });
 
