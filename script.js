@@ -5,15 +5,7 @@ const pauseButton = document.getElementById('pauseButton');
 const resetButton = document.getElementById('resetButton');
 const smallBlindInput = document.getElementById('smallBlind');
 const bigBlindDisplay = document.getElementById('bigBlindDisplay');
-let alarmSound = document.getElementById('alarmSound');
-let audioEnabled = false;
-
-function enableAudio() {
-    if (!audioEnabled) {
-        alarmSound = new Audio('alarm.mp3');
-        audioEnabled = true;
-    }
-}
+const alarmSound = document.getElementById('alarmSound');
 
 let timer;
 let seconds = 0;
@@ -39,7 +31,7 @@ function updateTimer() {
 }
 
 function playAlarm() {
-    enableAudio();
+    alarmSound.currentTime = 0; // Reset audio to the beginning
     alarmSound.play();
 }
 
@@ -55,6 +47,7 @@ startButton.addEventListener('click', () => {
         timerDisplay.textContent = formatTime(seconds);
         timer = setInterval(updateTimer, 1000);
         isRunning = true;
+        playAlarm(); // Play alarm on starting the timer
     }
 });
 
