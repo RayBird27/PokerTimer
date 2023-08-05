@@ -32,8 +32,13 @@ function updateTimer() {
 }
 
 function playAlarm() {
-    alarmSound.currentTime = 0; // Reset audio to the beginning
-    alarmSound.play();
+    if (alarmSound.paused) {
+        alarmSound.play().catch(error => {
+            console.error('Audio play error:', error);
+        });
+    } else {
+        alarmSound.currentTime = 0; // Reset audio to the beginning
+    }
 }
 
 function updateBigBlindDisplay() {
