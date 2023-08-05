@@ -5,19 +5,19 @@ body {
     align-items: center;
     height: 100vh;
     margin: 0;
-    background-color: black;
+    background-color: #121212; /* Dark background color */
 }
 
 .timer-container {
     text-align: center;
-    background-color: #34495e;
+    background-color: #1E1E1E; /* Dark gray background */
     padding: 40px;
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
     width: 450px;
     max-width: 100%;
     margin: 0 auto;
-    position: relative; /* Added for positioning the revision number */
+    position: relative;
 }
 
 .timer-title {
@@ -37,7 +37,7 @@ body {
     bottom: 10px;
     left: 10px;
     font-size: 0.8rem;
-    color: #ccc;
+    color: #bbb; /* Light gray color */
 }
 
 .dark-text {
@@ -52,7 +52,7 @@ body {
     font-size: 1rem;
     padding: 8px 20px;
     margin: 5px;
-    background-color: #3498db;
+    background-color: #2979FF; /* Blue color */
     color: #ffffff;
     border: none;
     border-radius: 5px;
@@ -61,7 +61,7 @@ body {
 }
 
 .control-button:hover {
-    background-color: #2980b9;
+    background-color: #2962FF; /* Darker blue on hover */
 }
 
 .blind-controls {
