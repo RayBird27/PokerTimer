@@ -61,6 +61,8 @@ resetButton.addEventListener('click', () => {
     seconds = 0;
     isRunning = false;
     timerDisplay.textContent = formatTime(seconds);
+    alarmSound.pause(); // Pause the alarm sound on reset
+    alarmSound.currentTime = 0; // Reset audio to the beginning
 });
 
 smallBlindInput.addEventListener('change', () => {
