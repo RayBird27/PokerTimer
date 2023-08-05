@@ -5,7 +5,15 @@ const pauseButton = document.getElementById('pauseButton');
 const resetButton = document.getElementById('resetButton');
 const smallBlindInput = document.getElementById('smallBlind');
 const bigBlindDisplay = document.getElementById('bigBlindDisplay');
-const alarmSound = document.getElementById('alarmSound');
+let alarmSound = document.getElementById('alarmSound');
+let audioEnabled = false;
+
+function enableAudio() {
+    if (!audioEnabled) {
+        alarmSound = new Audio('alarm.mp3');
+        audioEnabled = true;
+    }
+}
 
 let timer;
 let seconds = 0;
@@ -31,6 +39,7 @@ function updateTimer() {
 }
 
 function playAlarm() {
+    enableAudio();
     alarmSound.play();
 }
 
