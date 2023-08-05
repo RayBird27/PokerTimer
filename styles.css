@@ -112,3 +112,7 @@ input[type="number"] {
     border: 1px solid #ccc;
     border-radius: 3px;
 }
+
+.continue-button {
+    margin-top: 20px;
+}

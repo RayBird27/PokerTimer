@@ -6,6 +6,7 @@ const resetButton = document.getElementById('resetButton');
 const smallBlindInput = document.getElementById('smallBlind');
 const bigBlindDisplay = document.getElementById('bigBlindDisplay');
 const alarmSound = document.getElementById('alarmSound');
+const continueButton = document.getElementById('continueButton');
 
 let timer;
 let seconds = 0;
@@ -68,6 +69,17 @@ resetButton.addEventListener('click', () => {
 smallBlindInput.addEventListener('change', () => {
     smallBlind = parseInt(smallBlindInput.value);
     updateBigBlindDisplay();
+});
+
+continueButton.addEventListener('click', () => {
+    if (!isRunning) {
+        const originalMinutes = parseInt(startingTimeInput.value);
+        const updatedMinutes = originalMinutes - 1;
+        startingTimeInput.value = updatedMinutes;
+        smallBlindInput.value = parseInt(smallBlindInput.value) + 1;
+        updateBigBlindDisplay();
+        startButton.click(); // Start the timer
+    }
 });
 
 updateBigBlindDisplay();
