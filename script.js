@@ -1,80 +1,69 @@
-let timerInterval;
+const timerDisplay = document.getElementById('timer');
+const startingTimeInput = document.getElementById('startingTime');
+const startButton = document.getElementById('startButton');
+const pauseButton = document.getElementById('pauseButton');
+const resetButton = document.getElementById('resetButton');
+const smallBlindInput = document.getElementById('smallBlind');
+const bigBlindDisplay = document.getElementById('bigBlindDisplay');
+const alarmSound = document.getElementById('alarmSound');
+
+let timer;
 let seconds = 0;
-let initialTime = 0;
-let isFlashing = false;
+let isRunning = false;
+let smallBlind = parseInt(smallBlindInput.value);
 
-const timerElement = document.getElementById('timer');
-const startButton = document.getElementById('start');
-const resetButton = document.getElementById('reset');
-const inputTime = document.getElementById('inputTime');
-const alarmAudio = document.getElementById('alarmAudio');
-const playAlarmButton = document.getElementById('playAlarm');
-
-function startTimer() {
-    if (!timerInterval) {
-        initialTime = parseInt(inputTime.value) * 60;
-        seconds = initialTime;
-        timerInterval = setInterval(updateTimer, 1000);
-        startButton.disabled = true;
-        inputTime.disabled = true;
-        document.body.style.backgroundColor = '#121212';
-    }
-}
-
-function resetTimer() {
-    clearInterval(timerInterval);
-    timerInterval = null;
-    seconds = 0;
-    timerElement.textContent = formatTime(seconds);
-    startButton.disabled = false;
-    inputTime.disabled = false;
-    isFlashing = false;
-    // Remove the background color change and keep it dark
-    document.body.style.backgroundColor = '#121212';
-    alarmAudio.pause();
-    alarmAudio.currentTime = 0;
+function formatTime(seconds) {
+    const minutes = Math.floor(seconds / 60);
+    const remainingSeconds = seconds % 60;
+    return `${minutes.toString().padStart(2, '0')}:${remainingSeconds.toString().padStart(2, '0')}`;
 }
 
 function updateTimer() {
     if (seconds > 0) {
         seconds--;
-        timerElement.textContent = formatTime(seconds);
+        timerDisplay.textContent = formatTime(seconds);
     } else {
-        clearInterval(timerInterval);
-        timerInterval = null;
-        timerElement.textContent = 'Time\'s Up!';
-        flashBackground();
+        clearInterval(timer);
+        isRunning = false;
+        timerDisplay.textContent = "00:00";
         playAlarm();
-        startButton.disabled = false;
-        isFlashing = true;
     }
 }
-
-function formatTime(timeInSeconds) {
-    const minutes = Math.floor(timeInSeconds / 60);
-    const seconds = timeInSeconds % 60;
-    return `${padZero(minutes)}:${padZero(seconds)}`;
-}
-
-function padZero(number) {
-    return number < 10 ? `0${number}` : number;
-}
-
-function flashBackground() {
-    if (isFlashing) {
-        document.body.style.backgroundColor = document.body.style.backgroundColor === '#f0f0f0' ? 'red' : '#f0f0f0';
-        setTimeout(flashBackground, 500);
-    }
-}
-
-playAlarmButton.addEventListener('click', playAlarm);
-
 
 function playAlarm() {
-    const audio = new Audio('alarm.mp3');
-    audio.play();
+    alarmSound.play();
 }
 
-startButton.addEventListener('click', startTimer);
-resetButton.addEventListener('click', resetTimer);
+function updateBigBlindDisplay() {
+    const smallBlindValue = parseInt(smallBlindInput.value);
+    const bigBlindValue = smallBlindValue * 2;
+    bigBlindDisplay.textContent = `${bigBlindValue}`;
+}
 
+startButton.addEventListener('click', () => {
+    if (!isRunning) {
+        seconds = parseInt(startingTimeInput.value) * 60;
+        timerDisplay.textContent = formatTime(seconds);
+        timer = setInterval(updateTimer, 1000);
+        isRunning = true;
+    }
+});
+
+pauseButton.addEventListener('click', () => {
+    clearInterval(timer);
+    isRunning = false;
+});
+
+resetButton.addEventListener('click', () => {
+    clearInterval(timer);
+    seconds = 0;
+    isRunning = false;
+    timerDisplay.textContent = formatTime(seconds);
+});
+
+smallBlindInput.addEventListener('change', () => {
+    smallBlind = parseInt(smallBlindInput.value);
+    updateBigBlindDisplay();
+});
+
+updateBigBlindDisplay();
