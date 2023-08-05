@@ -17,6 +17,7 @@ body {
     width: 450px;
     max-width: 100%;
     margin: 0 auto;
+    position: relative; /* Added for positioning the revision number */
 }
 
 .timer-title {
@@ -29,6 +30,14 @@ body {
     font-size: 3rem;
     margin-bottom: 30px;
     color: #ffffff;
+}
+
+.revision {
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+    font-size: 0.8rem;
+    color: #ccc;
 }
 
 .dark-text {
